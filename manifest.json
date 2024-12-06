@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "ReadingPace",
+  "version": "1.0",
+  "description": "智能阅读节奏助手 - 估算阅读时间，追踪阅读进度，提升阅读体验",
+  "permissions": ["activeTab", "storage"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
