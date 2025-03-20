@@ -1,5 +1,5 @@
 // 默认阅读速度（每分钟字数）
-const DEFAULT_READING_SPEED = 200;
+const DEFAULT_READING_SPEED = 300;
 
 // 阅读类网站的特征域名
 const READING_DOMAINS = [
@@ -469,12 +469,19 @@ function calculateReadingTime() {
     
     makeDraggable(container);
     
+    // 存储当前使用的阅读速度
+    let currentReadingSpeed = DEFAULT_READING_SPEED;
+    
     chrome.storage.sync.get({
         readingSpeed: DEFAULT_READING_SPEED
     }, function(items) {
-        updateDisplay(container, wordCount, items.readingSpeed, progressBar);
+        currentReadingSpeed = items.readingSpeed;
+        updateDisplay(container, wordCount, currentReadingSpeed, progressBar);
         
-        const speedInput = createSpeedInput(items.readingSpeed, (newSpeed) => {
+        const speedInput = createSpeedInput(currentReadingSpeed, (newSpeed) => {
+            // 更新当前阅读速度变量
+            currentReadingSpeed = newSpeed;
+            // 保存到Chrome存储
             chrome.storage.sync.set({ readingSpeed: newSpeed }, () => {
                 updateDisplay(container, wordCount, newSpeed, progressBar);
             });
@@ -489,11 +496,8 @@ function calculateReadingTime() {
             clearTimeout(scrollTimeout);
         }
         scrollTimeout = setTimeout(() => {
-            chrome.storage.sync.get({
-                readingSpeed: DEFAULT_READING_SPEED
-            }, function(items) {
-                updateDisplay(container, wordCount, items.readingSpeed, progressBar);
-            });
+            // 使用当前阅读速度而不是重新从存储中获取
+            updateDisplay(container, wordCount, currentReadingSpeed, progressBar);
         }, 100);
     });
 

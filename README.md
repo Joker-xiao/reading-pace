@@ -32,7 +32,7 @@ ReadingPace 是一款智能的 Chrome 扩展，专注于提供网页阅读时间
 
 1. 下载源代码
    ```bash
-   git clone https://github.com/yourusername/reading-pace.git
+   git clone https://github.com/Joker-xiao/reading-pace.git
    cd reading-pace
    ```
 

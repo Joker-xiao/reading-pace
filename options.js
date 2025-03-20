@@ -1,5 +1,5 @@
 // 默认阅读速度
-const DEFAULT_READING_SPEED = 200;
+const DEFAULT_READING_SPEED =300;
 
 // 保存设置
 function saveOptions() {
